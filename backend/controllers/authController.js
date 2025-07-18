@@ -75,4 +75,14 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const getUserProfile = async (req, res) => {};
+export const getUserProfile = async (req, res) => {
+  try{
+    const user = req.LoggedInUser;
+    const getUser = await UserModel.findById(user._id);
+    res.status(200).json(getUser);
+  }
+  catch(error){
+    res.status(400);
+    throw new Error(error.message);
+  }
+};

@@ -11,7 +11,7 @@ export const protect = async(req, res, next) => {
     try{
         let decoded = jwt.verify(token, process.env.JWT_SECRET);
         let user = await UserModel.findOne({email: decoded.email}).select("-password");
-        console.log("in mid",user);
+        
         req.LoggedInUser = user;
         next();
     }

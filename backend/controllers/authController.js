@@ -10,7 +10,7 @@ const generateToken = (user) => {
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, profileImageUrl } = req.body;
 
     const ExistedUser = await UserModel.findOne({ email });
     if (ExistedUser) {
@@ -28,6 +28,7 @@ export const registerUser = async (req, res) => {
           name,
           email,
           password: hash,
+          profileImageUrl,
         });
         let token = generateToken(user);
         res.cookie("token", token);
@@ -35,6 +36,7 @@ export const registerUser = async (req, res) => {
           _id: user._id,
           name: user.name,
           email: user.email,
+          profileImageUrl: user.profileImageUrl,
           token,
         });
         console.log(token);
@@ -50,21 +52,23 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = UserModel.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (!user) {
       res.status(400);
       throw new Error("User does not exist");
     }
 
     bcrypt.compare(password, user.password, (err, result) => {
-      if (err) return res.send("password not matched");
-      else if (result) {
+      if (err) {
+        res.send("password not matched");
+      } else if (result) {
         let token = generateToken(user);
         res.cookie("token", token);
         res.status(200).json({
           _id: user._id,
           name: user.name,
           email: user.email,
+          profileImageUrl: user.profileImageUrl,
           token,
         });
       }
@@ -76,13 +80,18 @@ export const loginUser = async (req, res) => {
 };
 
 export const getUserProfile = async (req, res) => {
-  try{
+  try {
     const user = req.LoggedInUser;
+    console.log(user);
     const getUser = await UserModel.findById(user._id);
+    if(!getUser){
+        res.status(400);
+        throw new Error("User does not exist");
+    }
     res.status(200).json(getUser);
-  }
-  catch(error){
+  } catch (error) {
     res.status(400);
+    console.log("got error", error);
     throw new Error(error.message);
   }
 };

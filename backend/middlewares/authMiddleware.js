@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { UserModel } from "../models/User";
+import { UserModel } from "../models/User.js";///doubt 1 .js or without .js
 
 
 export const protect = async(req, res, next) => {
@@ -11,6 +11,7 @@ export const protect = async(req, res, next) => {
     try{
         let decoded = jwt.verify(token, process.env.JWT_SECRET);
         let user = await UserModel.findOne({email: decoded.email}).select("-password");
+        console.log("in mid",user);
         req.LoggedInUser = user;
         next();
     }

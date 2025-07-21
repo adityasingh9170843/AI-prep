@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import authRoute from './routes/authRoute.js';
 import sessionRoutes from './routes/sessionRoute.js';
-
+import questionRoute from './routes/questionRoute.js';
 
 
 
@@ -36,7 +36,7 @@ app.use(cors({
 //routes
 app.use('/api/auth',authRoute)
 app.use('/api/session',sessionRoutes)
-// app.use('/api/question',questionRoutes)
+app.use('/api/question',questionRoute)
 // app.use('api/ai/generate-questions',protect,generateInterviewQuestions)
 // app.use('/api/ai/generate-explanation',protect,generateInterviewExplanation)
 

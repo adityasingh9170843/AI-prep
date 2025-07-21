@@ -9,8 +9,8 @@ import { dirname } from 'path';
 import authRoute from './routes/authRoute.js';
 import sessionRoutes from './routes/sessionRoute.js';
 import questionRoute from './routes/questionRoute.js';
-
-
+import {protect} from './middlewares/authMiddleware.js';
+import { generateInterviewQuestions, generateInterviewExplanation } from './controllers/aiController.js';
 
 dotenv.config({ quiet: true });
 
@@ -37,8 +37,8 @@ app.use(cors({
 app.use('/api/auth',authRoute)
 app.use('/api/session',sessionRoutes)
 app.use('/api/question',questionRoute)
-// app.use('api/ai/generate-questions',protect,generateInterviewQuestions)
-// app.use('/api/ai/generate-explanation',protect,generateInterviewExplanation)
+app.post('/api/ai/generate-questions',protect,generateInterviewQuestions)
+app.post('/api/ai/generate-explanation',protect,generateInterviewExplanation)
 
 
 

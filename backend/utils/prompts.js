@@ -1,24 +1,33 @@
-export const questionAnswerPrompt = (role, experience, topicsToFocus, numberOfQuestions) => (`
-You are an AI trained to generate technical interview questions and answers.
+export const questionAnswerPrompt = (role, experience, topicsToFocus, numberOfQuestions) => `
+You are an AI assistant that generates interview questions and answers in valid JSON format only.
 
-Task:
+Instructions:
 - Role: ${role}
 - Candidate Experience: ${experience} years
 - Focus Topics: ${topicsToFocus}
-- Write ${numberOfQuestions} interview questions.
-- For each question, generate a detailed but beginner-friendly answer.
-- If the answer needs a code example, add a small code block inside.
-- Keep formatting very clean.
-- Return a pure JSON array like:
+- Number of Questions: ${numberOfQuestions}
+
+Requirements:
+1. Output must be a **pure JSON array** without any markdown, code fences, or extra text.
+2. Each array item must be an object with:
+   - "question": a concise interview question.
+   - "answer": a clear, beginner-friendly answer. Include **code examples inside the answer string**, properly indented if necessary.
+3. Maintain correct JSON formatting, including escaped characters for newlines (\\n).
+4. Do not prepend or append any explanations, notes, or formatting instructions.
+
+Example structure to follow:
+
 [
     {
-        "question": "Question here.",
-        "answer": "Answer here."
+        "question": "Explain closures in JavaScript.",
+        "answer": "A closure is a function that retains access to its outer scope even after the outer function has returned.\\nExample:\\n\\nfunction outer() {\\n  let counter = 0;\\n  return function inner() {\\n    counter++;\\n    console.log(counter);\\n  };\\n}\\n\\nconst fn = outer();\\nfn(); // 1\\nfn(); // 2"
     },
     ...
 ]
-Important: Do NOT add any extra text. Only return valid JSON.
-`);
+
+Generate the ${numberOfQuestions} questions and their detailed answers strictly in the above format.
+Only output valid JSON.
+`;
 
 
 

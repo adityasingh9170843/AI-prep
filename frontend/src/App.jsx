@@ -5,10 +5,12 @@ import SignUp from './pages/Auth/SignUp'
 import LandingPage from './pages/LandingPage'
 import InterviewPrep from './pages/interviewPrep/InterviewPrep'
 import {Button} from "./components/ui/button"
+import UserProvider from './context/userContext'
 function App() {
   
 
   return (
+    <UserProvider>
     <div>
       <Router>
         <Routes>
@@ -19,6 +21,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </UserProvider>
   )
 }
 

@@ -19,6 +19,14 @@ import {
   Menu,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { UserContext } from "@/context/userContext";
 
 const iconMap = {
@@ -33,10 +41,9 @@ const iconMap = {
 const LandingPage = () => {
   const { user, loading, logout } = useContext(UserContext);
 
-  if(loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-sans relative overflow-hidden">
-      
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 opacity-90" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen blur-3xl opacity-20" />
@@ -44,7 +51,6 @@ const LandingPage = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen blur-3xl opacity-15" />
       </div>
 
-      
       <header className="container mx-auto px-4 py-6 flex justify-between items-center relative z-10">
         <div className="text-3xl font-extrabold text-white tracking-tight">
           Ai-Prep
@@ -58,11 +64,16 @@ const LandingPage = () => {
                   Dashboard
                 </Button>
               </Link>
-              
-                <Button variant="ghost" size="sm" className="text-white" disabled={loading} onClick={logout}>
-                  Logout
-                </Button>
-             
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white"
+                disabled={loading}
+                onClick={logout}
+              >
+                Logout
+              </Button>
             </>
           ) : (
             <>
@@ -80,7 +91,68 @@ const LandingPage = () => {
           )}
         </nav>
         <Button variant="ghost" size="icon" className="md:hidden text-white">
-          <Menu className="h-6 w-6" />
+          <Sheet>
+            <SheetTrigger>
+              <Menu className="h-6 w-6" />
+            </SheetTrigger>
+            <SheetContent
+              side="left"
+              className="bg-gray-900 text-white border-l border-gray-700 shadow-lg"
+            >
+              <SheetHeader>
+                <SheetTitle className="text-white">
+                  {user ? `Welcome, ${user.name}` : "Welcome"}
+                </SheetTitle>
+                <SheetDescription className="text-gray-400">
+                  <div className="mt-4 space-y-2">
+                    {user ? (
+                      <>
+                        <Link to="/dashboard">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-white"
+                          >
+                            Dashboard
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="w-full justify-start text-white"
+                          disabled={loading}
+                          onClick={logout}
+                        >
+                          Logout
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/login">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-white"
+                          >
+                            Login
+                          </Button>
+                        </Link>
+                        <Link to="/register">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-white"
+                          >
+                            Register
+                          </Button>
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
         </Button>
       </header>
 
@@ -104,7 +176,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      
       <section className="py-16 md:py-24 bg-gray-900 relative z-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -141,11 +212,12 @@ const LandingPage = () => {
         </div>
       </section>
 
-      
       <footer className="bg-gray-950 text-gray-500 py-8 text-center relative z-10">
         <div className="container mx-auto px-4">
-          <p>&copy; {new Date().getFullYear()} Ai-Prep. by Aditya Singh All rights reserved.</p>
-          
+          <p>
+            &copy; {new Date().getFullYear()} Ai-Prep. by Aditya Singh All
+            rights reserved.
+          </p>
         </div>
       </footer>
     </div>

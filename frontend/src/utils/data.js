@@ -1,27 +1,32 @@
 export const APP_FEATURES = [
-    {
-        id:"01",
-        title:"Tailored Just for you",
-        description:"Get Interview Prep tailored just for you",
-    },
-    {
-        id:"02",
-        title:"Get Started in minutes",
-        description:"Get Interview Prep tailored just for you",
-    },
-    {
-        id:"03",
-        title:"Get Started in minutes",
-        description:"Get Interview Prep tailored just for you",
-    },
-    {
-        id:"04",
-        title:"Get Started in minutes",
-        description:"Get Interview Prep tailored just for you",
-    },
-    {
-        id:"05",
-        title:"Get Started in minutes",
-        description:"Get Interview Prep tailored just for you",
-    }
+  {
+    title: "AI Mock Interviews",
+    description: "Practice with AI-powered interviewers that adapt to your responses.",
+    icon: "Sparkles", // Lucide icon name
+  },
+  {
+    title: "Personalized Feedback",
+    description: "Receive instant, detailed feedback on your answers, body language, and tone.",
+    icon: "MessageSquare",
+  },
+  {
+    title: "Customizable Scenarios",
+    description: "Choose from a wide range of industry-specific and role-based interview scenarios.",
+    icon: "Settings",
+  },
+  {
+    title: "Performance Tracking",
+    description: "Monitor your progress over time with comprehensive analytics and insights.",
+    icon: "Activity",
+  },
+  {
+    title: "Resume Analysis",
+    description: "Get AI-driven suggestions to optimize your resume for target roles.",
+    icon: "FileText",
+  },
+  {
+    title: "Behavioral Question Prep",
+    description: "Master common behavioral questions with structured practice and examples.",
+    icon: "Users",
+  },
 ]

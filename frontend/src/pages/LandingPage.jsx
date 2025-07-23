@@ -1,40 +1,155 @@
-import React from 'react'
-import { APP_FEATURES } from '@/utils/data'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-function LandingPage() {
-  const navigate = useNavigate()
+import React, { useContext } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { APP_FEATURES } from "@/utils/data";
+import {
+  Sparkles,
+  MessageSquare,
+  Settings,
+  Activity,
+  FileText,
+  Users,
+  Menu,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { UserContext } from "@/context/userContext";
 
-  const [openAuthModal, setOpenAuthModal] = useState(false)
-  const [currentPage, setCurrentPage] = useState("login")
+const iconMap = {
+  Sparkles,
+  MessageSquare,
+  Settings,
+  Activity,
+  FileText,
+  Users,
+};
 
-  const handleCTA = () =>{
+const LandingPage = () => {
+  const { user, loading, logout } = useContext(UserContext);
 
-  }
-
-
+  if(loading) return <div>Loading...</div>;
   return (
-    <div className=''>
-      {/* header */}
-      <header>
-        <div>
+    <div className="min-h-screen bg-gray-950 text-gray-50 font-sans relative overflow-hidden">
+      
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 opacity-90" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen blur-3xl opacity-20" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600 rounded-full mix-blend-screen blur-3xl opacity-20" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen blur-3xl opacity-15" />
+      </div>
+
+      
+      <header className="container mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <div className="text-3xl font-extrabold text-white tracking-tight">
           Ai-Prep
         </div>
-        <button className='' onClick={()=>setOpenAuthModal(true)}>
-          Login/SignUp
-        </button>
+        <nav className="hidden md:flex items-center space-x-6">
+          {user ? (
+            <>
+              <span className="text-white mr-2">Welcome, {user.name}</span>
+              <Link to="/dashboard">
+                <Button variant="ghost" size="sm" className="text-white">
+                  Dashboard
+                </Button>
+              </Link>
+              
+                <Button variant="ghost" size="sm" className="text-white" disabled={loading} onClick={logout}>
+                  Logout
+                </Button>
+             
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button variant="ghost" size="sm" className="text-white">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="ghost" size="sm" className="text-white">
+                  Register
+                </Button>
+              </Link>
+            </>
+          )}
+        </nav>
+        <Button variant="ghost" size="icon" className="md:hidden text-white">
+          <Menu className="h-6 w-6" />
+        </Button>
       </header>
 
       {/* Hero */}
-      <div>
-        <div>
-          <div>
-            AI Powered
+      <section className="py-20 md:py-28 text-center relative z-10">
+        <div className="container mx-auto px-4">
+          <Badge className="mb-4 px-4 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full shadow-md">
+            🚀 Elevate Your Interview Game
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+              Intelligent
+            </span>{" "}
+            Interview Preparation
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Unlock your full potential with AI-driven mock interviews,
+            personalized feedback, and strategic insights to conquer any job
+            interview.
+          </p>
+        </div>
+      </section>
+
+      
+      <section className="py-16 md:py-24 bg-gray-900 relative z-10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Why Ai-Prep is Your{" "}
+            <span className="text-purple-400">Ultimate Advantage</span>
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {APP_FEATURES.map((feature, index) => {
+              const Icon = iconMap[feature.icon];
+              return (
+                <Card
+                  key={index}
+                  className="bg-gray-800 border border-gray-700 shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <CardHeader className="flex flex-col items-center">
+                    {Icon && (
+                      <div className="p-3 mb-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-md">
+                        <Icon className="h-8 w-8 text-white" />
+                      </div>
+                    )}
+                    <CardTitle className="text-lg font-semibold text-white text-center">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-center text-gray-400">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </div>
-  )
-}
+      </section>
 
-export default LandingPage
+      
+      <footer className="bg-gray-950 text-gray-500 py-8 text-center relative z-10">
+        <div className="container mx-auto px-4">
+          <p>&copy; {new Date().getFullYear()} Ai-Prep. by Aditya Singh All rights reserved.</p>
+          
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default LandingPage;

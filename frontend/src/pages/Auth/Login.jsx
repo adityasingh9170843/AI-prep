@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import {
   Loader2, BookOpen, Lightbulb, ClipboardCheck, GraduationCap,
   PencilRuler, MessageSquare, Laptop, UserCheck
 } from "lucide-react";
+import { UserContext } from "@/context/userContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const {updateUser} = useContext(UserContext)
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
@@ -31,11 +33,16 @@ function Login() {
       const response = await axios.post("http://localhost:5000/api/auth/login", {
         email,
         password
+      }, {
+        withCredentials: true
       });
-
-      console.log("Login Success", response.data);
-      localStorage.setItem("token", response.data.token);
-      navigate("/dashboard");
+      console.log(response.data);
+      const {token} = response.data;
+      if(token){
+        updateUser(response.data);
+        localStorage.setItem("token", token);
+        navigate("/");
+      }
     } catch (err) {
       console.error(err);
       setError(err?.response?.data?.message || "Login failed");

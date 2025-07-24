@@ -58,7 +58,25 @@ const LandingPage = () => {
         <nav className="hidden md:flex items-center space-x-6">
           {user ? (
             <>
-              <span className="text-white mr-2">Welcome, {user.name}</span>
+              <div className="flex items-center space-x-2 mr-4">
+                {user.profileImageUrl ? (
+                  <img
+                    className="w-12 h-12 mr-3 rounded-full ring-2 ring-white shadow-md transition-transform duration-300 hover:scale-105"
+                    src={user.profileImageUrl}
+                    alt={user.name}
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full border border-white/30 bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
+                    <span className="text-white font-semibold text-xs">
+                      {user.name?.charAt(0)?.toUpperCase()}
+                    </span>
+                  </div>
+                )}
+                <span className="text-white text-sm font-medium hidden md:inline">
+                  Welcome {user.name}
+                </span>
+              </div>
+
               <Link to="/dashboard">
                 <Button variant="ghost" size="sm" className="text-white">
                   Dashboard
@@ -68,7 +86,7 @@ const LandingPage = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white"
+                className="text-white "
                 disabled={loading}
                 onClick={logout}
               >
@@ -78,13 +96,21 @@ const LandingPage = () => {
           ) : (
             <>
               <Link to="/login">
-                <Button variant="ghost" size="sm" className="text-white">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/10"
+                >
                   Login
                 </Button>
               </Link>
               <Link to="/register">
-                <Button variant="ghost" size="sm" className="text-white">
-                  Register
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/10"
+                >
+                  Sign Up
                 </Button>
               </Link>
             </>

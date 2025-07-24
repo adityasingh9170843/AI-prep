@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage'
 import InterviewPrep from './pages/interviewPrep/InterviewPrep'
 import {Button} from "./components/ui/button"
 import UserProvider from './context/userContext'
+import Dashboard from './pages/Home/Dashboard'
 function App() {
   
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="/register" element={<SignUp />} />
           <Route path="/interviewprep/:sId" element={<InterviewPrep />} />
         </Routes>

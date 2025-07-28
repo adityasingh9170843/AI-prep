@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="/register" element={<SignUp />} />
-          <Route path="/interviewprep/:sId" element={<InterviewPrep />} />
+          <Route path="/interview-prep/:sId" element={<InterviewPrep />} />
         </Routes>
       </Router>
     </div>

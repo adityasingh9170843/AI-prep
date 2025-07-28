@@ -43,10 +43,10 @@ function Dashboard() {
     }
   };
 
-  const handleDeleteSession = async() =>{
+  const handleDeleteSession = async(id) =>{
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/session/${session._id}`,
+        `http://localhost:5000/api/session/${id}`,
         { withCredentials: true }
       );
       console.log(response);
@@ -59,7 +59,7 @@ function Dashboard() {
   const createNewSession = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/session",
+        "http://localhost:5000/api/session/create",
         {
           targetRole,
           yearsOfExperience,
@@ -136,7 +136,7 @@ function Dashboard() {
               className="group relative overflow-hidden rounded-2xl border-0 bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
-              onClick={() => navigate(`/interview-prep/${session._id}`)}
+              
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 z-10" />
 
@@ -161,7 +161,7 @@ function Dashboard() {
                   <div className="pt-8 pl-20">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
+                        <h3 onClick={() => navigate(`/interview-prep/${session._id}`)} className="text-2xl font-bold text-gray-900 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
                           {session.role}
                         </h3>
                         <p className="text-base text-muted-foreground mt-1">

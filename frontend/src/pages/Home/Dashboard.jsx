@@ -25,12 +25,10 @@ function Dashboard() {
   const [sessions, setSessions] = useState([]);
   const [open, setOpen] = useState(false);
   const [hover, setHover] = useState(false);
-  const [form, setForm] = useState({
-    targetRole: "",
-    yearsOfExperience: "",
-    topics: "",
-    description: "",
-  });
+  const [targetRole, setTargetRole] = useState("");
+  const [yearsOfExperience, setYearsOfExperience] = useState("");
+  const [topics, setTopics] = useState("");
+  const [description, setDescription] = useState("");
 
   const fetchAllSessions = async () => {
     try {
@@ -45,9 +43,32 @@ function Dashboard() {
     }
   };
 
+  const handleDeleteSession = async() =>{
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/session/${session._id}`,
+        { withCredentials: true }
+      );
+      console.log(response);
+      fetchAllSessions();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const createNewSession = async () => {
     try {
-      
+      const response = await axios.post(
+        "http://localhost:5000/api/session",
+        {
+          targetRole,
+          yearsOfExperience,
+          topics,
+          description,
+        },
+        { withCredentials: true }
+      )
+      console.log(response);
       fetchAllSessions();
     } catch (error) {
       console.error("Error creating session:", error);
@@ -75,28 +96,29 @@ function Dashboard() {
               <div>
                 <Label>Target Role</Label>
                 <Input
-                  
+                value={targetRole}
+                onChange ={(e) => setTargetRole(e.target.value)}
                 />
               </div>
               <div>
                 <Label>Years of Experience</Label>
-                <Input
-                  type="number"
-                  
+                <Input type="number" 
+                value ={yearsOfExperience}
+                onChange={(e) => setYearsOfExperience(e.target.value)}
                 />
               </div>
               <div>
                 <Label>Topics to Focus On</Label>
                 <Input
-                  
+                value={topics}
+                onChange={(e) => setTopics(e.target.value)}
                 />
               </div>
               <div>
                 <Label>Description</Label>
-                <Textarea
-                  rows={3}
-                  
-                />
+                <Textarea rows={3}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)} />
               </div>
               <Button onClick={createNewSession}>Create Session</Button>
             </div>
@@ -116,14 +138,12 @@ function Dashboard() {
               onMouseLeave={() => setHover(false)}
               onClick={() => navigate(`/interview-prep/${session._id}`)}
             >
-              
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 z-10" />
 
               <CardContent className="relative p-6 z-20">
-                  
                 {hover && (
                   <Button
-                    onClick={() => console.log("Delete clicked:", session._id)}
+                    onClick={() => handleDeleteSession(session._id)}
                     className="absolute top-0 right-6 p-2 rounded-full bg-red-100 text-red-500 hover:bg-red-200 transition-all duration-200"
                   >
                     <Trash2 className="w-6 h-6" />
@@ -131,7 +151,6 @@ function Dashboard() {
                 )}
 
                 <div className="relative">
-                  
                   <div className="absolute top-8 w-14 h-14 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-bold rounded-xl flex items-center justify-center text-lg shadow-lg border-4 border-white">
                     <img
                       src="https://randomuser.me/api/portraits/men/1.jpg"
@@ -140,7 +159,6 @@ function Dashboard() {
                   </div>
 
                   <div className="pt-8 pl-20">
-                      
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="text-2xl font-bold text-gray-900 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
@@ -162,7 +180,6 @@ function Dashboard() {
                       </span>
                     </div>
 
-                      
                     <div className="flex flex-wrap gap-2 mb-4">
                       <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium border border-emerald-200 shadow-sm">
                         {session.experience} Years Exp.
@@ -172,7 +189,6 @@ function Dashboard() {
                       </span>
                     </div>
 
-                      
                     <p className="text-base text-gray-700 leading-relaxed">
                       {session.description}
                     </p>

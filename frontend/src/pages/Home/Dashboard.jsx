@@ -307,7 +307,7 @@ function Dashboard() {
             {sessions.map((session) => (
               <Card
                 key={session._id}
-                className="group relative overflow-hidden rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:rotate-1 cursor-pointer"
+                className="group relative overflow-hidden rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
                 onMouseEnter={() => setHoveredCard(true)}
                 onMouseLeave={() => setHoveredCard(false)}
               >

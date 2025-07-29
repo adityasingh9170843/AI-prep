@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
           "http://localhost:5000/api/auth/profile",
           { withCredentials: true } 
         );
+        console.log("bababa",response.data);
         setUser(response.data);
       } catch (err) {
         console.log("User not authenticated", err);

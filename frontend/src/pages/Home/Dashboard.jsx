@@ -13,6 +13,7 @@ import {
   User,
   BookOpen,
   TrendingUp,
+  Loader,
 } from "lucide-react";
 import {
   Dialog,
@@ -41,6 +42,8 @@ function Dashboard() {
   const [yearsOfExperience, setYearsOfExperience] = useState("");
   const [topics, setTopics] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const fetchAllSessions = async () => {
     try {
@@ -70,20 +73,43 @@ function Dashboard() {
 
   const createNewSession = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/session/create",
+        "http://localhost:5000/api/ai/generate-questions",
         {
-          targetRole,
-          yearsOfExperience,
-          topics,
-          description,
+          role: targetRole,
+          experience: yearsOfExperience,
+          topicsToFocus: topics,
+          numberOfQuestions: 10,
         },
         { withCredentials: true }
       );
-      console.log(response);
+      
+      const generatedQuestions = response.data;
+      console.log("Generated questions:", generatedQuestions);
+      const response2 = await axios.post(
+        "http://localhost:5000/api/session/create",
+        {
+          role   : targetRole,
+          experience : yearsOfExperience,
+          topicsToFocus : topics,
+          description : description,
+          questions : generatedQuestions
+        },
+        { withCredentials: true }
+      );
+      console.log(response2);
+      if(response2?.data?._id){
+        navigate(`/interview-prep/${response2?.data?._id}`);
+      }
+      
+
+      
       fetchAllSessions();
     } catch (error) {
       console.error("Error creating session:", error);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -200,6 +226,7 @@ function Dashboard() {
                   </Label>
                   <Input
                     value={targetRole}
+                    required
                     onChange={(e) => setTargetRole(e.target.value)}
                     className="bg-white/70 border-white/80 placeholder:text-gray-500 focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 rounded-xl"
                     placeholder="e.g. Frontend Developer"
@@ -213,6 +240,7 @@ function Dashboard() {
                   </Label>
                   <Input
                     type="number"
+                    required
                     value={yearsOfExperience}
                     onChange={(e) => setYearsOfExperience(e.target.value)}
                     className="bg-white/70 border-white/80 placeholder:text-gray-500 focus:ring-2 focus:ring-purple-400 focus:border-purple-400 rounded-xl"
@@ -227,6 +255,7 @@ function Dashboard() {
                   </Label>
                   <Input
                     value={topics}
+                    required
                     onChange={(e) => setTopics(e.target.value)}
                     className="bg-white/70 border-white/80 placeholder:text-gray-500 focus:ring-2 focus:ring-pink-400 focus:border-pink-400 rounded-xl"
                     placeholder="e.g. React, System Design"
@@ -240,6 +269,7 @@ function Dashboard() {
                   </Label>
                   <Textarea
                     rows={3}
+                    required
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="bg-white/70 border-white/80 placeholder:text-gray-500 focus:ring-2 focus:ring-green-400 focus:border-green-400 rounded-xl"
@@ -249,10 +279,11 @@ function Dashboard() {
 
                 <Button
                   onClick={createNewSession}
+                  disabled={loading}
                   className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 rounded-xl py-3 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <Zap className="w-5 h-5 mr-2" />
-                  Launch AI Session
+                  {loading ? <Loader className="w-5 h-5 animate-spin"/> :"Launch AI Session" }
                 </Button>
               </div>
             </DialogContent>

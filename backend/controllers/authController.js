@@ -82,13 +82,8 @@ export const loginUser = async (req, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const user = req.LoggedInUser;
-    console.log(user);
-    const getUser = await UserModel.findById(user._id);
-    if(!getUser){
-        res.status(400);
-        throw new Error("User does not exist");
-    }
-    res.status(200).json(getUser);
+
+    res.status(200).json(user);
   } catch (error) {
     res.status(400);
     console.log("got error", error);
@@ -96,14 +91,13 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-export const logoutUser = async(req,res)=>{
-  try{
+export const logoutUser = async (req, res) => {
+  try {
     res.clearCookie("token");
-    res.status(200).json({message:"Logged out successfully"});
-  }
-  catch(error){
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
     res.status(400);
     console.log("got error", error);
     throw new Error(error.message);
   }
-}
+};

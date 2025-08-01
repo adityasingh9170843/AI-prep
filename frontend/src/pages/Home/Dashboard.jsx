@@ -44,16 +44,14 @@ function Dashboard() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   const fetchAllSessions = async () => {
     try {
       const response = await axios.get(
         "http://localhost:5000/api/session/my-sessions",
         { withCredentials: true }
       );
-      console.log("seesions on db",response);
+      console.log("seesions on db", response);
       setSessions(response.data);
-      
     } catch (error) {
       console.error(error);
     }
@@ -85,31 +83,29 @@ function Dashboard() {
         },
         { withCredentials: true }
       );
-      
+
       const generatedQuestions = response.data;
       console.log("Generated questions:", generatedQuestions);
       const response2 = await axios.post(
         "http://localhost:5000/api/session/create",
         {
-          role   : targetRole,
-          experience : yearsOfExperience,
-          topicsToFocus : topics,
-          description : description,
-          questions : generatedQuestions
+          role: targetRole,
+          experience: yearsOfExperience,
+          topicsToFocus: topics,
+          description: description,
+          questions: generatedQuestions,
         },
         { withCredentials: true }
       );
       console.log(response2);
-      if(response2?.data?._id){
+      if (response2?.data?._id) {
         navigate(`/interview-prep/${response2?.data?._id}`);
       }
-      
 
-      
       fetchAllSessions();
     } catch (error) {
       console.error("Error creating session:", error);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -200,7 +196,6 @@ function Dashboard() {
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px] bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-2xl relative overflow-hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              {/* Dialog background decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-100/50 to-transparent rounded-full transform translate-x-8 -translate-y-8"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-100/50 to-transparent rounded-full transform -translate-x-4 translate-y-4"></div>
 
@@ -284,7 +279,11 @@ function Dashboard() {
                   className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 rounded-xl py-3 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <Zap className="w-5 h-5 mr-2" />
-                  {loading ? <Loader className="w-5 h-5 animate-spin"/> :"Launch AI Session" }
+                  {loading ? (
+                    <Loader className="w-5 h-5 animate-spin" />
+                  ) : (
+                    "Launch AI Session"
+                  )}
                 </Button>
               </div>
             </DialogContent>
@@ -321,7 +320,6 @@ function Dashboard() {
                   {hoveredCard && (
                     <Button
                       onClick={() => handleDeleteSession(session._id)}
-                      
                       className="absolute top-2 right-9 p-3 rounded-full bg-red-100/80 text-red-500 hover:bg-red-200/80 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110"
                     >
                       <Trash2 className="w-5 h-5" />

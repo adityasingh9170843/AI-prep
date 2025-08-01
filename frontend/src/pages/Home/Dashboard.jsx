@@ -51,8 +51,9 @@ function Dashboard() {
         "http://localhost:5000/api/session/my-sessions",
         { withCredentials: true }
       );
+      console.log("seesions on db",response);
       setSessions(response.data);
-      console.log(response);
+      
     } catch (error) {
       console.error(error);
     }
@@ -320,6 +321,7 @@ function Dashboard() {
                   {hoveredCard && (
                     <Button
                       onClick={() => handleDeleteSession(session._id)}
+                      
                       className="absolute top-2 right-9 p-3 rounded-full bg-red-100/80 text-red-500 hover:bg-red-200/80 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110"
                     >
                       <Trash2 className="w-5 h-5" />

@@ -46,6 +46,7 @@ export const generateInterviewQuestions = async (req, res) => {
 export const generateInterviewExplanation = async (req, res) => {
   try {
     const { question } = req.body;
+    console.log("hit");
     if (!question) {
       res.status(400);
       throw new Error("All fields are required");

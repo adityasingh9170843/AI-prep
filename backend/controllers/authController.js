@@ -31,7 +31,11 @@ export const registerUser = async (req, res) => {
           profileImageUrl,
         });
         let token = generateToken(user);
-        res.cookie("token", token);
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: true, // Important for HTTPS
+          sameSite: "None",
+        });
         res.status(201).json({
           _id: user._id,
           name: user.name,

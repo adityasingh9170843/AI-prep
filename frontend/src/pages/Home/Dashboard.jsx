@@ -135,9 +135,9 @@ function Dashboard() {
     }
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
-      {/* Background AI-themed decorative elements */}
+      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large background icons */}
+        
         <Brain className="absolute top-20 left-10 w-32 h-32 text-blue-100/30 transform rotate-12" />
         <MessageCircle className="absolute top-40 right-20 w-24 h-24 text-purple-100/40 transform -rotate-12" />
         <Target className="absolute bottom-40 left-20 w-28 h-28 text-indigo-100/30 transform rotate-45" />
@@ -146,12 +146,12 @@ function Dashboard() {
         <BookOpen className="absolute top-10 right-1/3 w-24 h-24 text-green-100/30 transform rotate-45" />
         <TrendingUp className="absolute bottom-60 right-1/3 w-20 h-20 text-blue-100/40 transform -rotate-45" />
 
-        {/* Floating orbs */}
+        
         <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-gradient-to-br from-indigo-200/20 to-pink-200/20 rounded-full blur-xl"></div>
         <div className="absolute top-1/2 right-1/5 w-32 h-32 bg-gradient-to-br from-emerald-200/20 to-blue-200/20 rounded-full blur-xl"></div>
 
-        {/* Circuit-like connecting lines */}
+       
         <svg
           className="absolute inset-0 w-full h-full opacity-10"
           viewBox="0 0 1000 1000"

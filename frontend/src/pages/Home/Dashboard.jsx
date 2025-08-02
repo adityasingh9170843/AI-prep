@@ -48,7 +48,7 @@ function Dashboard() {
   const fetchAllSessions = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/session/my-sessions",
+        `${import.meta.env.VITE_API_URL}/session/my-sessions`,
         { withCredentials: true }
       );
       console.log("seesions on db", response);
@@ -61,7 +61,7 @@ function Dashboard() {
   const handleDeleteSession = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/session/${id}`,
+        `${import.meta.env.VITE_API_URL}/session/${id}`,
         { withCredentials: true }
       );
       console.log(response);
@@ -75,7 +75,7 @@ function Dashboard() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/ai/generate-questions",
+        `${import.meta.env.VITE_API_URL}/ai/generate-questions`,
         {
           role: targetRole,
           experience: yearsOfExperience,
@@ -88,7 +88,7 @@ function Dashboard() {
       const generatedQuestions = response.data;
       console.log("Generated questions:", generatedQuestions);
       const response2 = await axios.post(
-        "http://localhost:5000/api/session/create",
+        `${import.meta.env.VITE_API_URL}/session/create`,
         {
           role: targetRole,
           experience: yearsOfExperience,

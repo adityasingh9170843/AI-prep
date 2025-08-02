@@ -33,7 +33,7 @@ function InterviewPrep() {
 
   const fetchSessionById = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/session/${sId}`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/session/${sId}`, {
         withCredentials: true,
       });
       setSessionData(res.data);
@@ -47,7 +47,7 @@ function InterviewPrep() {
     setSelectedExplanation(null); // Clear previous explanation
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/ai/generate-explanation",
+        `${import.meta.env.VITE_API_URL}/ai/generate-explanation`,
         { question },
         { withCredentials: true }
       );

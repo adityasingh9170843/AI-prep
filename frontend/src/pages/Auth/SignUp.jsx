@@ -45,7 +45,7 @@ function SignUp() {
         formData.append("image", selectedFile);
 
         const imgUpload = await axios.post(
-          "http://localhost:5000/api/auth/upload-image",
+          `${import.meta.env.VITE_API_URL}/auth/upload-image`,
           formData,
           {
             headers: {
@@ -59,7 +59,7 @@ function SignUp() {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${import.meta.env.VITE_API_URL}/auth/register`,
         {
           email,
           password,

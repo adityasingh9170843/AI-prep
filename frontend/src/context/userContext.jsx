@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/auth/profile",
+          `${import.meta.env.VITE_API_URL}/auth/profile`,
           { withCredentials: true } 
         );
         console.log("bababa",response.data);
@@ -37,7 +37,7 @@ const UserProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout",{},{ withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`,{},{ withCredentials: true });
       clearUser();
     } catch (err) {
       console.log("Logout failed", err);

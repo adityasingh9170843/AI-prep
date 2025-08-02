@@ -29,6 +29,7 @@ function InterviewPrep() {
   const [sessionData, setSessionData] = useState(null);
   const [selectedExplanation, setSelectedExplanation] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const fetchSessionById = async () => {
     try {
@@ -62,15 +63,21 @@ function InterviewPrep() {
     fetchSessionById();
   }, []);
 
-  if (!sessionData) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (initialLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <Brain className="w-16 h-16 text-indigo-500 mx-auto mb-4 animate-pulse" />
-          <p className="text-xl text-gray-600 font-medium">
-            Loading your AI session...
-          </p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+        <Sparkles className="w-10 h-10 animate-spin text-purple-500 mr-2" />
+        <p className="text-lg font-semibold text-gray-700">
+          Preparing your session...
+        </p>
       </div>
     );
   }
@@ -146,10 +153,10 @@ function InterviewPrep() {
           </div>
           <div>
             <Link to={`/interview-prep/${sId}/StartAQuiz`}>
-            <Button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-6 py-3 rounded-2xl font-medium">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Start a Quiz
-            </Button>
+              <Button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-6 py-3 rounded-2xl font-medium">
+                <Sparkles className="w-5 h-5 mr-2" />
+                Start a Quiz
+              </Button>
             </Link>
           </div>
         </div>

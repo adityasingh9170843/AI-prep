@@ -43,6 +43,7 @@ function Dashboard() {
   const [topics, setTopics] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const fetchAllSessions = async () => {
     try {
@@ -114,6 +115,24 @@ function Dashboard() {
     if (userId) fetchAllSessions();
   }, [userId]);
 
+   useEffect(() => {
+      const timer = setTimeout(() => {
+        setInitialLoading(false);
+      }, 2000);
+  
+      return () => clearTimeout(timer);
+    }, []);
+
+   if (initialLoading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+          <Sparkles className="w-10 h-10 animate-spin text-purple-500 mr-2" />
+          <p className="text-lg font-semibold text-gray-700">
+            Preparing your Dashboard...
+          </p>
+        </div>
+      );
+    }
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
       {/* Background AI-themed decorative elements */}

@@ -67,7 +67,11 @@ export const loginUser = async (req, res) => {
         res.send("password not matched");
       } else if (result) {
         let token = generateToken(user);
-        res.cookie("token", token);
+        res.cookie("token", token,{
+          httpOnly: true,
+          secure: true, 
+          sameSite: "None",
+        });
         res.status(200).json({
           _id: user._id,
           name: user.name,

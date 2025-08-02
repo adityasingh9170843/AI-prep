@@ -52,3 +52,33 @@ Important: Do NOT add any extra text outside the JSON format. Only return valid 
 
 
 
+export const generateQuizPrompt = (role) => (`
+You are an AI trained to generate quiz questions for developers.
+
+Task:
+- Based on the topic below, generate a quiz of **10 multiple-choice questions**.
+- Topic: "${role}"
+- Each question should test conceptual understanding.
+- Each question must have 4 distinct options labeled A, B, C, and D.
+- Clearly mark the correct answer.
+- Keep the difficulty at a beginner to intermediate level.
+- Ensure that the questions are not repeated and cover different subtopics if possible.
+- Return the result as a **valid JSON array** of objects in the following format:
+
+[
+  {
+    "question": "Your question here",
+    "options": {
+      "A": "Option A",
+      "B": "Option B",
+      "C": "Option C",
+      "D": "Option D"
+    },
+    "answer": "C"
+  },
+  ...
+]
+
+Important: Do NOT add any explanation or extra text outside the JSON format.
+Only return a valid JSON array.
+`);

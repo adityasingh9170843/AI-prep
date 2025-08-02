@@ -2,6 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import {
   questionAnswerPrompt,
   conceptExplainPrompt,
+  generateQuizPrompt,
 } from "../utils/prompts.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -76,3 +77,42 @@ export const generateInterviewExplanation = async (req, res) => {
     throw new Error(error.message);
   }
 };
+
+
+export const generateInterviewQuiz = async (req, res) => {
+  try {
+    const { role } = req.body;
+
+    if (!role) {
+      res.status(400);
+      throw new Error("Topic is required");
+    }
+
+    const prompt = generateQuizPrompt(role);
+    const response = await ai.models.generateContent({
+      contents: prompt,
+      model: "gemini-2.0-flash",
+      temperature: 0.7,
+    });
+
+    let rawText = response.text;
+
+    const cleanedText = rawText
+      .replace(/^\s*```(json)?\s*/i, "")
+      .replace(/\s*```$/, "")
+      .trim();
+
+    const parsed = JSON.parse(cleanedText);
+
+    
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      throw new Error("Invalid quiz format returned by AI.");
+    }
+
+    res.status(200).json(parsed);
+  } catch (error) {
+    console.error("Quiz generation failed:", error.message);
+    res.status(500).json({ message: error.message || "Server Error" });
+  }
+};
+

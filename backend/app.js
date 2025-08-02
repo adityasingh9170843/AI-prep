@@ -10,7 +10,7 @@ import authRoute from './routes/authRoute.js';
 import sessionRoutes from './routes/sessionRoute.js';
 import questionRoute from './routes/questionRoute.js';
 import {protect} from './middlewares/authMiddleware.js';
-import { generateInterviewQuestions, generateInterviewExplanation } from './controllers/aiController.js';
+import { generateInterviewQuestions, generateInterviewExplanation, generateInterviewQuiz } from './controllers/aiController.js';
 
 dotenv.config({ quiet: true });
 
@@ -39,6 +39,7 @@ app.use('/api/session',sessionRoutes)
 app.use('/api/question',questionRoute)
 app.post('/api/ai/generate-questions',protect,generateInterviewQuestions)
 app.post('/api/ai/generate-explanation',protect,generateInterviewExplanation)
+app.post('/api/ai/generate-quiz',protect,generateInterviewQuiz)
 
 
 

@@ -22,6 +22,7 @@ import {
   Zap,
   User,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function InterviewPrep() {
   const { sId } = useParams();
@@ -129,17 +130,27 @@ function InterviewPrep() {
       </div>
 
       <div className="relative z-10 p-8">
-        <div className="flex items-center space-x-4 mb-8">
-          <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
-            <Brain className="w-8 h-8 text-white" />
+        <div className="flex items-center space-x-4 mb-8 justify-between">
+          <div className="flex items-center space-x-4 mb-8">
+            <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
+              <Brain className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                AI Interview Preparation
+              </h1>
+              <p className="text-gray-600 mt-1">
+                Master your skills with AI-powered practice
+              </p>
+            </div>
           </div>
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              AI Interview Preparation
-            </h1>
-            <p className="text-gray-600 mt-1">
-              Master your skills with AI-powered practice
-            </p>
+            <Link to={`/interview-prep/${sId}/StartAQuiz`}>
+            <Button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-6 py-3 rounded-2xl font-medium">
+              <Sparkles className="w-5 h-5 mr-2" />
+              Start a Quiz
+            </Button>
+            </Link>
           </div>
         </div>
 

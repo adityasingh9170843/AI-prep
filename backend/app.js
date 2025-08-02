@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(cors({
-    origin: "https://ai-prep-pearl.vercel.app/",
+    origin: ["https://ai-prep-4.onrender.com","http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true

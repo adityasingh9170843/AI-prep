@@ -324,7 +324,7 @@ const LandingPage = () => {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="public/ai.png"
+                  src="/ai.png"
                   alt="AI Interview Preparation"
                   className="w-full h-auto object-cover"
                 />

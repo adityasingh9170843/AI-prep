@@ -40,7 +40,7 @@ const LandingPage = () => {
   const { user, loading, logout } = useContext(UserContext);
 
 
-  if (loading) return <div>Loading...</div>;
+  
 
   
 

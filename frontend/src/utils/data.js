@@ -1,22 +1,22 @@
 export const APP_FEATURES = [
   {
-    title: "AI Mock Interviews",
-    description: "Practice with AI-powered interviewers that adapt to your responses.",
-    icon: "Sparkles", // Lucide icon name
+    title: "AI Mock Quiz",
+    description: "Practice with AI-powered Quiz that adapt to your responses.",
+    icon: "Sparkles", 
   },
   {
-    title: "Personalized Feedback",
-    description: "Receive instant, detailed feedback on your answers, body language, and tone.",
+    title: "Personalized Dashboard",
+    description: "Create a personalized dashboard to track your progress and insights.",
     icon: "MessageSquare",
   },
   {
-    title: "Customizable Scenarios",
-    description: "Choose from a wide range of industry-specific and role-based interview scenarios.",
+    title: "Customizable Sessions",
+    description: "Create and customize sessions to fit your specific needs.",
     icon: "Settings",
   },
   {
-    title: "Performance Tracking",
-    description: "Monitor your progress over time with comprehensive analytics and insights.",
+    title: "Questions according to your role",
+    description: "Get questions according to your role and experience level.",
     icon: "Activity",
   },
   {

@@ -26,7 +26,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { UserContext } from "@/context/userContext";
-
+import { useNavigate } from "react-router-dom";
 const iconMap = {
   Sparkles,
   MessageSquare,
@@ -38,7 +38,11 @@ const iconMap = {
 
 const LandingPage = () => {
   const { user, loading, logout } = useContext(UserContext);
+
+
   if (loading) return <div>Loading...</div>;
+
+  
 
   return (
     <div className="min-h-screen bg-slate-900 text-gray-50 font-sans relative overflow-hidden">
@@ -195,7 +199,7 @@ const LandingPage = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-gray-300 hover:text-white"
+                  className="text-gray-300 hover:text-black"
                 >
                   Login
                 </Button>

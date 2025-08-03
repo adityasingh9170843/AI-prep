@@ -2,12 +2,13 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import { UserContext } from "@/context/userContext";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Loader2, BookOpen, Lightbulb, ClipboardCheck, GraduationCap,
-  PencilRuler, MessageSquare, Laptop, UserCheck
+  PencilRuler, MessageSquare, Laptop, UserCheck, Sparkles
 } from "lucide-react";
 
 function SignUp() {
@@ -17,6 +18,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate(); 
@@ -81,6 +83,26 @@ function SignUp() {
       setLoading(false);
     }
   };
+
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      setInitialLoading(false);
+    },2000)
+
+    return () => clearTimeout(timer);
+  },[])
+
+  
+   if (initialLoading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+          <Sparkles className="w-10 h-10 animate-spin text-purple-500 mr-2" />
+          <p className="text-lg font-semibold text-gray-700">
+            First Step towards Success...
+          </p>
+        </div>
+      );
+    }
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">

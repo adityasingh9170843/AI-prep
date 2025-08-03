@@ -1,4 +1,4 @@
-import { use, useState, useContext } from "react";
+import { use, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Loader2, BookOpen, Lightbulb, ClipboardCheck, GraduationCap,
-  PencilRuler, MessageSquare, Laptop, UserCheck
+  PencilRuler, MessageSquare, Laptop, UserCheck,Sparkles
 } from "lucide-react";
 import { UserContext } from "@/context/userContext";
 
@@ -15,6 +15,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const[initialLoading, setInitialLoading] = useState(true);
   const navigate = useNavigate();
 
   const {updateUser} = useContext(UserContext)
@@ -41,7 +42,7 @@ function Login() {
       if(token){
         updateUser(response.data);
         localStorage.setItem("token", token);
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (err) {
       console.error(err);
@@ -50,6 +51,26 @@ function Login() {
       setIsLoading(false);
     }
   };
+
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      setInitialLoading(false);
+    },2000)
+
+    return () => clearTimeout(timer);
+  },[])
+
+  
+   if (initialLoading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+          <Sparkles className="w-10 h-10 animate-spin text-purple-500 mr-2" />
+          <p className="text-lg font-semibold text-gray-700">
+            Get ready to kickstart your interview prep...
+          </p>
+        </div>
+      );
+    }
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">

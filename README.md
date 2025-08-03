@@ -2,7 +2,17 @@
 
 An intelligent web app that helps users get ready for interviews using generative AI. Create personalized interview sessions, get AI-generated questions and explanations, and take custom quizzes — all with a clean and modern ShadCN UI interface.
 
-<img width="2560" height="1268" alt="image" src="https://github.com/user-attachments/assets/b4d02778-4104-424c-9cb5-8bb8dee0d84a" />
+
+<img width="2536" height="1268" alt="image" src="https://github.com/user-attachments/assets/c0ff668b-d33a-4c6a-b261-86d3cd1f4c52" />
+
+
+<img width="2540" height="1241" alt="image" src="https://github.com/user-attachments/assets/45f34bf4-c629-4b61-8966-0325347d5974" />
+
+
+<img width="2515" height="1258" alt="image" src="https://github.com/user-attachments/assets/062a44ea-d513-48f7-afdb-f7d6a2b21bce" />
+
+
+<img width="2538" height="1271" alt="image" src="https://github.com/user-attachments/assets/a7ad6475-8028-423a-9b6d-cff7708836ab" />
 
 
 ---

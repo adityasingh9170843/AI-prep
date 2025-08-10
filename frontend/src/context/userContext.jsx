@@ -21,6 +21,7 @@ const UserProvider = ({ children }) => {
         clearUser();
       } finally {
         setLoading(false);
+        
       }
     };
 

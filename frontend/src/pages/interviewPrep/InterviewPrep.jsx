@@ -160,6 +160,12 @@ function InterviewPrep() {
                 Start a Quiz
               </Button>
             </Link>
+            <Link to={`/interview-prep/${sId}/MockInterview`}>
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                Start a Mock Interview
+              </Button>
+            </Link>
           </div>
         </div>
 

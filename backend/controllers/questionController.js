@@ -5,6 +5,7 @@ import { SessionModel } from "../models/Session.js";
 export const addQuestion = async(req,res)=>{
     try{
         const {sessionId,questions} = req.body;
+        
 
         if(!sessionId || !questions || questions.length === 0){
             res.status(400);

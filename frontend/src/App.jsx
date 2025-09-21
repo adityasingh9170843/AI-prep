@@ -8,6 +8,7 @@ import {Button} from "./components/ui/button"
 import UserProvider from './context/userContext'
 import Dashboard from './pages/Home/Dashboard'
 import StartAQuiz from './pages/interviewPrep/StartAQuiz'
+import MockInterview from './pages/interviewPrep/MockInterview'
 function App() {
   
 
@@ -22,6 +23,8 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/interview-prep/:sId" element={<InterviewPrep />} />
           <Route path="/interview-prep/:sId/StartAQuiz" element={<StartAQuiz />} />
+          <Route path="/interview-prep/:sId/MockInterview" element={<MockInterview />} />
+
         </Routes>
       </Router>
     </div>

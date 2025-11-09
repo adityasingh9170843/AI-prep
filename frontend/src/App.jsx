@@ -9,6 +9,7 @@ import UserProvider from './context/userContext'
 import Dashboard from './pages/Home/Dashboard'
 import StartAQuiz from './pages/interviewPrep/StartAQuiz'
 import MockInterview from './pages/interviewPrep/MockInterview'
+import StartInterview from './pages/interviewPrep/StartInterview'
 function App() {
   
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/interview-prep/:sId" element={<InterviewPrep />} />
           <Route path="/interview-prep/:sId/StartAQuiz" element={<StartAQuiz />} />
           <Route path="/interview-prep/:sId/MockInterview" element={<MockInterview />} />
+          <Route path="/interview-prep/:sId/MockInterview/start" element={<StartInterview />} />
 
         </Routes>
       </Router>

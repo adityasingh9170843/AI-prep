@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Webcam from "react-webcam";
 import {
@@ -12,6 +12,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 function MockInterview() {
@@ -19,15 +20,12 @@ function MockInterview() {
   const [isWebCamOn, setIsWebCamOn] = useState(false);
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const fetchSessionById = async () => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/session/${sId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/session/${sId}`, {
+        withCredentials: true,
+      });
       setSessionData(res.data);
     } catch (err) {
       console.error("Fetch Error:", err);
@@ -36,9 +34,19 @@ function MockInterview() {
     }
   };
 
+   const handleStartInterview = () => {
+    if (!isWebCamOn) {
+      alert("Please enable your webcam before starting the interview.");
+      return;
+    }
+    navigate(`/interview-prep/${sId}/MockInterview/start`);
+  };
+
   useEffect(() => {
     fetchSessionById();
   }, []);
+
+
 
   if (loading) {
     return (
@@ -55,7 +63,6 @@ function MockInterview() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
-      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Brain className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 text-blue-100/30 transform rotate-12" />
         <MessageCircle className="absolute top-40 right-20 w-12 h-12 sm:w-24 sm:h-24 text-purple-100/40 transform -rotate-12" />
@@ -66,7 +73,6 @@ function MockInterview() {
       </div>
 
       <div className="relative z-10 p-4 sm:p-6 lg:p-8">
-       
         <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
           <div className="p-2 sm:p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl shadow-lg">
             <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
@@ -82,7 +88,6 @@ function MockInterview() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-         
           <div className="w-full lg:w-1/2 space-y-6">
             <Card className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg">
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
@@ -130,8 +135,7 @@ function MockInterview() {
             </Card>
           </div>
 
-          
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 space-y-4">
             <Card className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg min-h-[350px] flex flex-col items-center justify-center">
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500" />
               <CardContent className="relative z-10 flex flex-col items-center justify-center w-full h-full space-y-6 p-6">
@@ -156,6 +160,27 @@ function MockInterview() {
                   {isWebCamOn ? "Stop Camera" : "Start Camera"}
                 </Button>
               </CardContent>
+            </Card>
+
+            {/* Warning / Instruction Box */}
+            <Card className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-0 bg-yellow-50/80 backdrop-blur-sm shadow-lg p-6 flex items-center justify-between">
+              <div className="flex-1 text-gray-800 space-y-2">
+                <p className="font-semibold text-gray-900 text-sm sm:text-base">
+                  Please enable your webcam and microphone to start the mock
+                  interview.
+                </p>
+                <p className="text-sm sm:text-base text-gray-700">
+                  You will get five questions, and after submitting, you'll
+                  receive a personalized report based on your responses.
+                </p>
+              </div>
+              
+                <Button onClick={handleStartInterview} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:from-indigo-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base">
+                  {isWebCamOn
+                    ? "Start Interview"
+                    : "Please enable webcam before starting the interview."}
+                </Button>
+              
             </Card>
           </div>
         </div>

@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(cors({
-    origin: ["http://localhost:5173","https://ai-prep-4.onrender.com"],
+    origin: ["https://ai-prep-fr.onrender.com","https://ai-prep-4.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true

@@ -14,6 +14,15 @@ An intelligent web app that helps users get ready for interviews using generativ
 
 <img width="2538" height="1271" alt="image" src="https://github.com/user-attachments/assets/a7ad6475-8028-423a-9b6d-cff7708836ab" />
 
+<img width="2553" height="1265" alt="image" src="https://github.com/user-attachments/assets/d0f39719-e3d0-42a8-92d4-803dcb7ce652" />
+
+<img width="2533" height="1254" alt="image" src="https://github.com/user-attachments/assets/3776d058-b730-4dfc-b90c-5a8c80e858e0" />
+
+<img width="2521" height="1254" alt="image" src="https://github.com/user-attachments/assets/0bfa337d-3a68-4be3-9c8e-5c7bfd3f3af5" />
+
+
+
+
 
 ---
 

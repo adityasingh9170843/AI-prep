@@ -16,7 +16,7 @@ function StartAQuiz() {
 
   const getSessionById = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/session/${sId}`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/session/${sId}`, {
         withCredentials: true,
       });
       setSessionData(res.data);
@@ -30,7 +30,7 @@ function StartAQuiz() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/ai/generate-quiz`,
+        `${import.meta.env.VITE_API_URL}/api/ai/generate-quiz`,
         { role },
         { withCredentials: true }
       );
